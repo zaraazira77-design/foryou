@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #FFF8E1, #F8BBD9);
+            color: #5D4E37;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+            position: relative; /* Untuk posisi hati relatif ke section */
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h1, h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #F8BBD9;
+            text-align: center;
+        }
+        p {
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        .heart {
+            font-size: 2em;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .interactive {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .interactive:hover {
+            transform: scale(1.05);
+        }
+        .surprise {
+            display: none;
+            background: rgba(248, 187, 217, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .surprise.show {
+            display: block;
+        }
+        .secret-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #F8BBD9;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        .secret-button:hover {
+            opacity: 1;
+        }
+        .falling-heart {
+            position: absolute;
+            font-size: 2em;
+            animation: fall 3s linear infinite;
+            pointer-events: none;
+            will-change: transform; /* Optimasi untuk animasi halus */
+        }
+        @keyframes fall {
+            0% { top: -50px; opacity: 1; transform: translateY(0); }
+            100% { top: 100%; opacity: 0; transform: translateY(0); }
+        }
+        /* Warna khusus untuk judul di slide 3 */
+        #moments h2 {
+            color: #DC143C; /* Crimson untuk merah, sama seperti slide 4 */
+        }
+        /* Warna khusus untuk judul di slide 4 */
+        #likes h2 {
+            color: #DC143C; /* Crimson untuk merah */
+        }
+    </style>
+</head>
+<body>
+    <!-- Halaman Pembuka -->
+    <div class="section visible" id="intro">
+        <h1>Happy Valentine Day Sayang! <3</h1>
+        <p>aku mau bilang makasihhh banyakk karena udah bikin hidup aku lebih bahagia dari sebelum-sebelumnya, being with uuu feels like home, you makes everything feels right. kamu gak perlu selalu selalu ngeluarin effort yang berlebihann, karena hal kecil yang kamu lakuin ajaa menurut aku udah cukup bikin aku ngerasa dicintai. cara kamu dengerin aku cerita, cara kamu ngertiin mood akuu ituu semua berartiii bangett. aku beruntung banget udah kenal dann bisa bareng sama kamuu, I'm so lucky to have you in this world</p>
+        <div class="heart">❤️</div>
+    </div>
+
+    <!-- Section 1: Cerita Perjalanan Cinta -->
+    <div class="section" id="story">
+        <h2>thank you sayang!</h2>
+        <p>aku harap bangett kita bisa sama sama terus sampai kapanpun, apapun masalahnya kita selesaiin baik baik yaa, intinyaa gaada yang boleh misahin kitaa‼️ walaupun kedepannya kita nggak tau bakal bareng lagi atau nggak, itu ga jadi halangan buat kita berdua</p>
+        <div class="interactive" onclick="alert('love grows when we grow together ‹𝟹')">karenaaa... klik ini</div>
+    </div>
+
+    <!-- Section 2: Momen Sederhana Bermakna -->
+    <div class="section" id="moments">
+        <h2>inget ini yaa!!</h2>
+        <p>kamu janji jangan tinggalin aku yaaa, aku gatau harus gimana lagi kalau kamu ninggalin aku terus ujung ujung nya kita jadi asingg, gamau gamau gamauuuuuuu 😕😕 I hope you’ll still choose to love me, even when I’m quiet, confusing, or hard to reach. semoga rasa cinta kamu ke aku bukan dari 100 ke 0 melainkan 100 ke 99999999999 atau nggak infinity juga boleh hheh ˙𐃷˙</p>
+        <div class="interactive" onclick="rainHearts()">coba pencet dehh</div>
+    </div>
+
+    <!-- Section 3: Hal-Hal yang Aku Sukai Diam-Diam -->
+    <div class="section" id="likes">
+        <h2>jangan tinggalin aku, ya?</h2>
+        <p>thankk youu for loving me, thank you for choosing me everyday. semoga hubungan kita ga cuma manis di awal, tapii semoga sampai seterusnyaa. i'm so grateful to have you, and i hope you always feels loved when you're with me. i loveee youu more than everything sayanggggg .. ૮₍´｡• ᵕ •｡`₎ა ♡ 💟💟</p>
+        <div class="interactive" onclick="scrollToNext()">By : Zarra<br>To : My Boyfriend, Titan 🤍</div>
+    </div>
+
+    <!-- Surprise Section (Muncul setelah scroll atau klik tombol rahasia) -->
+    <div class="section surprise" id="surprise">
+        <h2>Surprise! Pesan dari Hatiku yang Terdalam</h2>
+        <p>Sayang, aku mau bilang... kamu adalah cahaya di hari gelapku. Aku harap kita bisa terus bareng, melewati apa pun. Terima kasih karena kamu percaya padaku, karena kamu ada di sini. Aku cinta kamu lebih dari kata-kata bisa ungkapkan. Masa depan kita? Aku bayangin penuh tawa, petualangan, dan cinta yang tak pernah pudar. Kamu mau kan, jalanin ini bareng aku? Forever starts now. 💖</p>
+        <div class="heart">💕</div>
+    </div>
+
+    <!-- Tombol Rahasia -->
+    <button class="secret-button" onclick="showSurprise()">?</button>
+
+    <!-- Audio untuk lagu (ganti src dengan link atau file audio Anda) -->
+    <audio id="song" src="https://example.com/last-night-on-earth-green-day.mp3" preload="none"></audio> <!-- Ganti dengan URL lagu yang valid atau file lokal -->
+
+    <script>
+        // Fungsi untuk menampilkan section bertahap saat scroll
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Fungsi untuk scroll ke section berikutnya
+        function scrollToNext() {
+            const nextSection = document.getElementById('surprise');
+            nextSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Fungsi untuk menampilkan surprise section
+        function showSurprise() {
+            const surprise = document.getElementById('surprise');
+            surprise.classList.add('show');
+            surprise.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Fungsi untuk hujan hati (kejutan di slide 3) - Diperbaiki untuk halus dan tanpa lag
+        function rainHearts() {
+            const momentsSection = document.getElementById('moments');
+            const numHearts = 30; // Kurangi jumlah hati menjadi 30 untuk mengurangi lag
+            for (let i = 0; i < numHearts; i++) {
+                setTimeout(() => { // Gunakan setTimeout untuk membuat hati muncul bertahap, bukan sekaligus
+                    const heart = document.createElement('div');
+                    heart.className = 'falling-heart';
+                    heart.innerHTML = '❤️'; // Emoji hati
+                    heart.style.left = Math.random() * 100 + '%'; // Posisi horizontal acak dalam section
+                    momentsSection.appendChild(heart);
+                    
+                    // Hapus hati setelah animasi selesai
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3000);
+                }, i * 100); // Delay 100ms per hati untuk efek bertahap dan halus
+            }
+        }
+    </script>
+</body>
+</html>
